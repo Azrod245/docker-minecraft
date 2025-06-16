@@ -10,6 +10,7 @@ cd /data/
 
 if [ ! -f /data/minecraft_server.jar ] || [[ `echo "$server_sha1 *minecraft_server.jar" | sha1sum -c -` != "minecraft_server.jar: OK" ]]
 then
+    echo "Downloading/Updating minecraft_server.jar"
     curl $server_url -o /data/minecraft_server.jar
 fi
 
