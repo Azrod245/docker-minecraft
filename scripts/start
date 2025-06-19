@@ -3,11 +3,15 @@
 # docker-minecraft /start script
 # -----------------------------------------------------------------------------
 
+server_url="https://piston-data.mojang.com/v1/objects/e6ec2f64e6080b9b5d9b471b291c33cc7f509733/server.jar"
+server_sha1=$(echo "$server_url" | cut -d'/' -f6) #get the server file hash
+
 cd /data/
 
-if [ ! -f /data/minecraft_server.jar ]
+if [ ! -f /data/minecraft_server.jar ] || [[ `echo "$server_sha1 *minecraft_server.jar" | sha1sum -c -` != "minecraft_server.jar: OK" ]]
 then
-    curl "https://piston-data.mojang.com/v1/objects/e6ec2f64e6080b9b5d9b471b291c33cc7f509733/server.jar" -o /data/minecraft_server.jar
+    echo "Downloading/Updating minecraft_server.jar"
+    curl $server_url -o /data/minecraft_server.jar
 fi
 
 if [ ! -f /data/eula.txt ]
