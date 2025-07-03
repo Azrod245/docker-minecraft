@@ -4,10 +4,11 @@
 # Builds a basic docker image that can run a Minecraft server
 # (http://minecraft.net/).
 # -----------------------------------------------------------------------------
-LABEL org.opencontainers.image.source = "https://github.com/Azrod245/docker-minecraft" 
 
 # Base image is the latest LTS version of Ubuntu
 FROM ubuntu:22.04
+
+LABEL org.opencontainers.image.source = "https://github.com/Azrod245/docker-minecraft" 
 
 # Make sure we don't get notifications we can't answer during building.
 ENV DEBIAN_FRONTEND noninteractive
